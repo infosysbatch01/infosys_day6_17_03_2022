@@ -345,18 +345,51 @@ public class CustomerMain {
 public class CustomerDetails {
   private int customerId;
   private String customerName;
-  private Address address[];
+  private Address addresses[];
  
  // setters/getters
 }
 
 public class CustomerDetailsMain {
    public static void main(String args[]) {
-      Address address[]=new Address[2];
+      Address addresses[]=new Address[2];
+      Scanner scanner=new Scanner(System.in);
+      for(int i=0;i<address.length;i++)
+         {
+             addresses[i]=new Address();
+             System.out.println("Enter house number");
+             String houseNo=scanner.next();
+             addresses[i].setHouseNo(houseNo);
+             System.out.println("Enter the street name");
+             String streetName=scanner.nextLine();
+             addresses[i].setStreetName(streetName);
+             System.out.println("Enter the city name");
+             String cityName=scanner.nextLine();
+             addresses[i].setCityName(cityName);
+             System.out.println("Enter the state name");
+             String stateName=scanner.next();
+             addresses[i].setStateName(stateName);
+         }
+        
       Customer customer=new Customer();
-
-  }
+      System.out.println("Enter the customer's id");
+      int id=scanner.nextInt();
+      scanner.nextLine();
+      customer.setCustomerId(id);
+      System.out.println("Enter the customer's name");
+      String name=scanner.nextLine();
+      customer.setCustomerName(name);
+      customer.setAddress(addresses);
+      System.out.println("The details of Customer");
+      System.out.println(customer.getCustomerId());
+      System.out.println(customer.getCustomerName());
+      addresses=customer.getAddresses();
+      for(Address address : addresses){
+             System.out.println(address.getHouseNo());
+             System.out.println(address.getStreetName());
+      }
+    }
 } 
-
+-------------------------------------------------------------------------------------
 
 
