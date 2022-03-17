@@ -1,0 +1,321 @@
+
+// Arrays and reference type
+
+    public class ArrayDemo1 {
+
+     public static void main(String args[]){
+      int num[]=new int[3];
+      Scanner scan=new Scanner(System.in);
+      for(int i=0;i<num.length;i++){
+            num[i]=scan.nextInt();
+      }
+      for(int x : num){
+       System.out.println(x);
+      }
+    }
+   }
+---------------------------------------
+  public class Student{
+     private int roll;
+     private String name;
+	public int getRoll() {
+		return roll;
+	}
+	public void setRoll(int roll) {
+		this.roll = roll;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+   
+    // setter/getter methods
+     
+   }
+
+  
+import java.util.Scanner;
+
+public class StudentMain{ 
+    public static void main(String args[]) {
+        Student student[]=new Student[3];
+        Scanner scan=new Scanner(System.in);
+        for(int i=0;i<student.length;i++) {
+              int roll=scan.nextInt();
+      /* Exception in thread "main" java.lang.NullPointerException: Cannot invoke "Student.setRoll(int)" because "student[i]" is null
+	at StudentMain.main(StudentMain.java:9)    */    
+              student[i].setRoll(roll);
+              String name=scan.next();
+              student[i].setName(name);
+        }
+          for(int i=0;i<student.length;i++) {
+            System.out.println(student[i].getRoll());
+            System.out.println(student[i].getName());
+        }
+      }
+  }
+
+--------------------------------------------------------------
+
+public class StudentMain{ 
+    public static void main(String args[]) {
+        Student student[]=new Student[3];  // Creating an array of references
+        // to store the address of multiple student objects
+        Scanner scan=new Scanner(System.in);
+        for(int i=0;i<student.length;i++) {
+               student[i]=new Student();
+       // The above statment we should not miss because it is initialising the
+       // array elements with the object. If we dont perform we get NullPointerException
+              student[i].setRoll(roll);
+              String name=scan.next();
+              student[i].setName(name);
+        }
+          for(int i=0;i<student.length;i++) {
+            System.out.println(student[i].getRoll());
+            System.out.println(student[i].getName());
+        }
+      }
+  }
+----------------------------------------------------------------------------------------------------
+Why main method is static?
+      public class Demo {
+            public static void main(String args[]){
+ 
+           }
+    }
+
+When we execute the code, JVM ( Java virtual Machine) needs to call the main method. But we know
+that if the method is non-static , we need to create an object of the class and access the method.
+Now if it would have been main mathod as non static, then we would require the object of the class
+which is having the main method.
+
+ public class Demo {
+            public  void main(String args[]){
+ 
+           }
+    }
+
+    Demo demo=new Demo();
+    demo.main();
+
+But we know execution starts from main, so until unless main starts we dont have a scope of
+creating the object. But we know if the method is static it can be called with the class name.
+So when we compile our code it creates the .class file which contains the class info. With that
+class the JVM can call the static main method.
+
+    Demo.class
+    Demo.main() 
+
+-----------------------------------------------------------------------------------------------------
+
+public class Food {
+	private String foodName;
+	private String cuisine;
+	private String foodType;
+	private int quantityAvailable;
+	private double unitPrice;
+	public String getFoodName() {
+		return foodName;
+	}
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+	public String getCuisine() {
+		return cuisine;
+	}
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
+	}
+	public String getFoodType() {
+		return foodType;
+	}
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
+	}
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+}
+
+
+public class Order {
+	private int orderId;
+	private Food orderedFoods;
+	private double totalPrice;
+	private String status;
+	public Order(int orderId, Food orderedFoods,String status) {
+		this.orderId = orderId;
+		this.orderedFoods = orderedFoods;
+		this.status = status;
+	}
+	public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+	public Food getOrderedFoods() {
+		return orderedFoods;
+	}
+	public void setOrderedFoods(Food orderedFoods) {
+		this.orderedFoods = orderedFoods;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+}
+
+
+
+public class Tester {
+	public static void main(String[] args) { 
+		Food food = new Food(); 
+		food.setFoodName("Pizza Margherita"); 
+		food.setCuisine("Italian"); 
+		food.setFoodType("Veg"); 
+		food.setQuantityAvailable(10); 
+		food.setUnitPrice(8.0); 
+		Order order = new Order(101, food,"Ordered"); 
+		 
+		System.out.println("Order placed successfully!"); 
+		// In line 15,Food food1=order.getOrderedFoods();
+		// System.out.println(food1.getFoodName());
+		System.out.println("You have ordered: "+ order.getOrderedFoods().getFoodName()); 
+		System.out.println("Order status: "+ order.getStatus());
+	} 
+	
+}
+------------------------------------------------------------------------------------------------
+An Employee is having a name. Name is further having firstName and lastName
+
+   public class Employee{
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String desig;
+    private String dept;
+ 
+    setter/getter
+  }
+---------------------------------------------------------------------------------------------------
+ public class Name {
+    private String firstName;
+    private String lastName;
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+   
+   // setters/getters
+
+  }
+
+  
+  public class Employee{
+    private int id;
+    private Name name;
+    private String desig;
+    private String dept;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Name getName() {
+		return name;
+	}
+	public void setName(Name name) {
+		this.name = name;
+	}
+	public String getDesig() {
+		return desig;
+	}
+	public void setDesig(String desig) {
+		this.desig = desig;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+    
+    // setters/getters
+    
+  }
+
+  
+
+ public class EmployeeMain{
+   public static void main(String args[]) {
+     Name name=new Name();
+     Employee emp=new Employee();
+     name.setFirstName("Rajesh");
+     name.setLastName("Sharma");
+     emp.setId(1);
+     emp.setName(name);
+     emp.setDesig("Manager");
+     emp.setDept("HR");
+     System.out.println(emp.getId());
+     System.out.println(emp.getName());  //Name@379619aa
+     System.out.println(emp.getName().getFirstName());
+     // emp.getName().getFirstName() emp.referenceofnametype.getFirstName(); 
+     System.out.println(emp.getName().getLastName());
+     name=emp.getName();
+     System.out.println(emp.getId());
+     System.out.println(name.getFirstName());
+     System.out.println(name.getLastName());
+     System.out.println(emp.getDesig());
+     System.out.println(emp.getDept());
+    }
+   }
+ 
+
+   
+  String str="Welcome";
+  // String toUpperCase();
+  str.toUpperCase().length();
+   WELCOME.length();
+  
+  String upper=str.toUpperCase();
+  int length=upper.length();
+
+  -------------------------------------------------------------------------
+
+Design a class Customer with customerId, customerName and address. Address is a class with houseNo,
+ streetName,city,state.
+Design the classes with the understanding of Aggregation concept.
+
+
+
+
+
