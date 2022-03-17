@@ -444,7 +444,7 @@ public class GiftVoucher{
     private String dept;
 
         
-
+// setters/getters
 public int getId() {
 		return id;
 	}
@@ -470,7 +470,7 @@ public int getId() {
 		this.dept = dept;
 	}
     
-    // setters/getters
+    
       public void appreciation(GiftVoucher voucher){
         System.out.println("ID "+voucher.getVoucherId());
         System.out.println("AMOUNT "+voucher.getAmount());
@@ -483,13 +483,15 @@ public int getId() {
 public class EmployeeDetailsMain{
    public static void main(String args[]) {
      Name name=new Name();
+     name.setFirstName("Rajesh");
+     name.setLastName("Sharma");
+     
      GiftVoucher voucher=new GiftVoucher();
      voucher.setVoucherId("V00001");
      voucher.setAmount(1000);
      voucher.setValidity("31-Dec-2024");
+     
      EmployeeDetails emp=new EmployeeDetails();
-     name.setFirstName("Rajesh");
-     name.setLastName("Sharma");
      emp.setId(1);
      emp.setName(name);
      emp.setDesig("Manager");
@@ -509,8 +511,221 @@ public class EmployeeDetailsMain{
      emp.appreciation(voucher);
     }
    }
- ------------------------------------------------------------------------------------------------
+ -----------------------------------------------------------------------------------------------------
 Design a class Customer with customerId, customerName and address. Address is a class with houseNo,
- streetName,city,state.Customer perform payment through CreditCard. CreditCard is having id,providersName,validity. Design the classes with the understanding of Aggregation and Association concept.
+streetName,city,state.Customer perform payment through CreditCard. CreditCard is having id,providersName,validity. Design the classes with the understanding of Aggregation and Association concept.
 
-----------------------------------------------------------------------------------------------	
+-----------------------------------------------------------------------------------------------------	
+Inheritance
+  public class Base1 {
+    private int num;
+       
+    public void setBase(int num){
+      this.num=num;
+    }
+    private void disp(){
+      System.out.println("The private method");
+     }
+    public void dispBase(){
+      System.out.println(num);
+    }
+
+ public class Derived1 extends Base1 {
+    private int num2;
+   /* In the following method in setDerived method we are trying to access the private '
+     member of the base class and trying to set the value as 10 */
+    public void setDerived(){
+        //num=10; private members of the base class is not accessible by the derived class
+        num2=20;
+    }          
+   
+   public void dispDerived(){
+     disp();  // So this line will show error because disp() is the
+     // private member of the base class
+     dispBase(); // Yes we can access dispBase as it is a public
+     // member of the base class. We dont require object of the
+     // base class to access it from the derived class.
+    //System.out.println(num);
+    System.out.println(num2);
+   }
+ }
+
+  public class InheritDemo1{
+  {
+  public static void main(String args[])
+  {
+       Base1 base=new Base1();
+       base.setBase(10);
+       base.dispBase();    //10
+       base.disp();
+       Derived1 derived=new Derived1();
+       derived.setBase(100);
+       derived.dispBase();    //100
+       derived.setDerived();
+       derived.dispDerived();
+       derived.disp();
+  }
+ }
+-----------------------------------------------------------------------------------------------
+ 
+class Customer {
+	//Parent/Super/Base class
+}
+class RegularCustomer extends Customer {        // RegularCustomer is a Customer
+	//Child/Sub/Derived class
+}
+class Guest extends Customer {                  // Guest is a Customer
+	//Child/Sub/Derived class
+}
+
+In the above example if we want to represent a Customer
+   Customer customer=new Customer();
+If we want to represent RegularCustomer in that case we need to create the
+object of RegularCustomer only.
+  RegularCustomer regularCustomer=new ReegularCustomer();
+------------------------------------------
+class Customer1 {
+	public Customer1() {
+		// 3: Parent constructor will be executed
+		System.out.println("Creating a customer...");
+		// 4: The flow will go back to the child constructor
+	}
+}
+class RegularCustomer1 extends Customer1 {
+	public RegularCustomer1() {
+		// 2: This constructor will then call the parent constructor
+		System.out.println("It is a regular customer!");
+		// 5: The flow will finally come here
+	}
+}
+public class Tester1 {
+	public static void main(String[] args) {
+		RegularCustomer1 regularCustomer = new RegularCustomer1();
+		// 1: This line will be executed first and the flow will go to [2]
+	}
+}
+-----------------------------------------------------------------------
+public class Customer2 {
+	private String customerId;
+	private String customerName;
+
+	public Customer2(String customerId, String customerName) {
+		this.customerId = customerId;
+		this.customerName = customerName;
+		System.out.println("I am the base class parameterized constructor");
+	}
+ 
+	public Customer2() {
+		System.out.println("Parent Default Constructor");
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public void displayCustomerDetails() {
+		System.out.println("Displaying customer details \n***************************");
+		System.out.println("Customer Id : " + customerId);
+		System.out.println("Customer Name : " + customerName);
+		System.out.println();
+	}
+}
+
+
+public class RegularCustomer2 extends Customer2 {
+	private float discount;
+	public RegularCustomer2(String custId, String custName) {
+		setCustomerId(custId);
+		setCustomerName(custName);
+		discount = 5.0f;
+		System.out.println("Child class parameterized Constructor");
+	}
+	public float getDiscount() {
+		return discount;
+	}
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+}
+
+public class Tester2 {
+	public static void main(String[] args) {
+		RegularCustomer2 regularCustomer = new RegularCustomer2("C1010",
+				"Johns Kora");
+		regularCustomer.displayCustomerDetails();
+	}
+}
+-----------------------------------------------------------------
+THE PARAMETERIZED CONSTRUCTOR OF SUB CLASS WILL CALL THE PARAMETERLESS CONSTRUCTOR OF THE BASE CLASS
+UNTIL UNLESS THE PARAMETERIZED CONSTRUCTOR OF BASE CLASS IS EXPLICITLY BEING CALLED.THE EXPLICIT CALL
+IS DONE THROUGH SUPER KEYWORD.
+
+public class Customer3 {
+	private String customerId;
+	private String customerName;
+
+	public Customer3(String customerId, String customerName) {
+		this.customerId = customerId;
+		this.customerName = customerName;
+		System.out.println("I am the base class parameterized constructor");
+	}
+ 
+	public Customer3() {
+		System.out.println("Parent Default Constructor");
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public void displayCustomerDetails() {
+		System.out.println("Displaying customer details \n***************************");
+		System.out.println("Customer Id : " + customerId);
+		System.out.println("Customer Name : " + customerName);
+		System.out.println();
+	}
+}
+
+
+
+public class RegularCustomer3 extends Customer3 {
+	private float discount;
+	public RegularCustomer3(String custId, String custName) {
+		/*setCustomerId(custId);
+		setCustomerName(custName);*/
+                super(custId,custName);
+		discount = 5.0f;
+		System.out.println("Child Class Parameterized Constructor");
+	}
+	public float getDiscount() {
+		return discount;
+	}
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+}
+
+public class Tester3 {
+	public static void main(String[] args) {
+		RegularCustomer3 regularCustomer = new RegularCustomer3("C1010",
+				"Johns Kora");
+		regularCustomer.displayCustomerDetails();
+	}
+}
+-----------------------------------------------------------------------------------------------
