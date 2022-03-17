@@ -312,8 +312,7 @@ An Employee is having a name. Name is further having firstName and lastName
   -----------------------------------------------------------------------------------------------------
 
 Design a class Customer with customerId, customerName and address. Address is a class with houseNo,
- streetName,city,state.
-Design the classes with the understanding of Aggregation concept.
+ streetName,city,state.Design the classes with the understanding of Aggregation concept.
 
 
 public class Customer {
@@ -391,5 +390,127 @@ public class CustomerDetailsMain {
     }
 } 
 -------------------------------------------------------------------------------------
+public class Name {
+    private String firstName;
+    private String lastName;
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+   
+   // setters/getters
+
+  }
+
+public class GiftVoucher{ 
+    private String voucherId;
+    private int amount;
+    private String validity;
+   // setter/getter
+	public String getVoucherId() {
+		return voucherId;
+	}
+	public void setVoucherId(String voucherId) {
+		this.voucherId = voucherId;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public String getValidity() {
+		return validity;
+	}
+	public void setValidity(String validity) {
+		this.validity = validity;
+	}
+
+ }
+
+  
+  public class EmployeeDetails{
+    private int id;
+    private Name name;
+    private String desig;
+    private String dept;
+
+        
+
+public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Name getName() {
+		return name;
+	}
+	public void setName(Name name) {
+		this.name = name;
+	}
+	public String getDesig() {
+		return desig;
+	}
+	public void setDesig(String desig) {
+		this.desig = desig;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+    
+    // setters/getters
+      public void appreciation(GiftVoucher voucher){
+        System.out.println("ID "+voucher.getVoucherId());
+        System.out.println("AMOUNT "+voucher.getAmount());
+        System.out.println("VALID TILL "+voucher.getValidity());
+        }
+    
+  }
 
 
+public class EmployeeDetailsMain{
+   public static void main(String args[]) {
+     Name name=new Name();
+     GiftVoucher voucher=new GiftVoucher();
+     voucher.setVoucherId("V00001");
+     voucher.setAmount(1000);
+     voucher.setValidity("31-Dec-2024");
+     EmployeeDetails emp=new EmployeeDetails();
+     name.setFirstName("Rajesh");
+     name.setLastName("Sharma");
+     emp.setId(1);
+     emp.setName(name);
+     emp.setDesig("Manager");
+     emp.setDept("HR");
+   
+     System.out.println(emp.getId());
+     System.out.println(emp.getName());  //Name@379619aa
+     System.out.println(emp.getName().getFirstName());
+     // emp.getName().getFirstName() emp.referenceofnametype.getFirstName(); 
+     System.out.println(emp.getName().getLastName());
+     name=emp.getName();
+     System.out.println(emp.getId());
+     System.out.println(name.getFirstName());
+     System.out.println(name.getLastName());
+     System.out.println(emp.getDesig());
+     System.out.println(emp.getDept());
+     emp.appreciation(voucher);
+    }
+   }
+ ------------------------------------------------------------------------------------------------
+Design a class Customer with customerId, customerName and address. Address is a class with houseNo,
+ streetName,city,state.Customer perform payment through CreditCard. CreditCard is having id,providersName,validity. Design the classes with the understanding of Aggregation and Association concept.
+
+----------------------------------------------------------------------------------------------	
