@@ -309,13 +309,54 @@ An Employee is having a name. Name is further having firstName and lastName
   String upper=str.toUpperCase();
   int length=upper.length();
 
-  -------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------------------------
 
 Design a class Customer with customerId, customerName and address. Address is a class with houseNo,
  streetName,city,state.
 Design the classes with the understanding of Aggregation concept.
 
 
+public class Customer {
+  private int customerId;
+  private String customerName;
+  private Address address;
+ 
+ // setters/getters
+}
+
+public class Address {
+   private String houseNo;
+   private String streetName;
+   private String city;
+   private String state;
+
+ // setters/getters
+}
+
+public class CustomerMain {
+   public static void main(String args[]) {
+      Address address=new Address();
+      Customer customer=new Customer();
+      
+  }
+} 
+-------------------------------------------------------------------------------------------------------
+// A customer can have 2 addresses. 
+public class CustomerDetails {
+  private int customerId;
+  private String customerName;
+  private Address address[];
+ 
+ // setters/getters
+}
+
+public class CustomerDetailsMain {
+   public static void main(String args[]) {
+      Address address[]=new Address[2];
+      Customer customer=new Customer();
+
+  }
+} 
 
 
 
