@@ -729,3 +729,181 @@ public class Tester3 {
 	}
 }
 -----------------------------------------------------------------------------------------------
+* Derived class parameterless constructor calls the base class parameterless constructor.
+
+   public class Base2 {
+
+   public Base2(){
+    System.out.println("I am the parameterless or default constructor");
+   }
+  }
+  public class Derived2 extends Base2 {
+   public Derived2(){
+   System.out.println("I am the parameterless or default constructor of the derived class");
+   }
+ }
+ 
+  public class Inherit2{
+    public static void main(String args[]){
+     Derived2 derived=new Derived2();
+    }
+  }
+---------------------------------------------------------------------------------------------
+// Default constructor of the Derived class calls the default constructor of the base class, provided
+during the compilation
+public class Base3 {
+
+ 
+  }
+  public class Derived3 extends Base3 {
+  
+ }
+ 
+  public class Inherit2{
+    public static void main(String args[]){
+     Derived3 derived=new Derived3();
+    }
+  }      
+  }
+--------------------------------------------------------
+// Parameterized constructor of the derived class calls the parameterless constructor of the Base class.
+
+public class Base4 {
+   
+  public Base4(){
+    System.out.println("I am the parameterless constructor of the base");
+  }
+ 
+  }
+  public class Derived4 extends Base4 {
+ 
+    public Derived4(int a,int b){
+     System.out.println("I am the parameterized constructor of the subclass");
+    } 
+ }
+ 
+  public class Inherit4{
+    public static void main(String args[]){
+     Derived4 derived=new Derived4(1,2);
+    }
+  }      
+  }
+-----------------------------------------------------------------------------------------------
+
+// So parameterized constructor of base class needs to be called explicitly with super keyword
+from the constructor of the derived class
+public class Base5 {
+   
+  public Base5(int i){
+    System.out.println("I am the parameter constructor of the base");
+  }
+ 
+  }
+  public class Derived5 extends Base5 {
+     public Derived5(int a,int b){
+     super(a);
+     System.out.println("I am the parameterized constructor of the subclass");
+    } 
+ }
+ 
+  public class Inherit5{
+    public static void main(String args[]){
+     Derived5 derived=new Derived5(1,2);
+    }
+  }      
+  }
+--------------------------------------------------------------------------------
+// Compilation error as Derived class parameterized will call the default/parameterless
+// constructor but as we have Parameterized constructorin the base class so the default constructor is not provided in the base and we have explicitly declare a parameterless constructor in the base class.
+// during the compilation.
+public class Base6 {
+   
+  public Base6(int i){
+    System.out.println("I am the parameter constructor of the base");
+  }
+ 
+  }
+  public class Derived6 extends Base6 {
+     public Derived6(int a,int b){
+     //super(a);
+     System.out.println("I am the parameterized constructor of the subclass");
+    } 
+ }
+ 
+  public class Inherit6{
+    public static void main(String args[]){
+     Derived6 derived=new Derived6(1,2);
+    }
+  }      
+  }
+
+------------------------------------------------------------------------------------
+Polymorphism:-
+* static polymorphism===> Method Overloading
+* dynamic polymorphism===> Method Overriding
+
+public class Number {
+   private int num1;
+   private int num2;
+   private int num3;
+   private float f1;
+   private float f2;
+   
+  public void add(int num1, int num2, int num3){
+    this.num1=num1;
+    this.num2=num2;
+    this.num3=num3;
+    System.out.println(this.num1+this.num2+this.num3);
+  }
+  // We cannot keep the previous method and this method as the signature is same(the method name and
+  // the number and datatype of parameters). Return type is not considered to decide method   //overloading.
+ /* public int add(int num1, int num2, int num3){
+   this.num1=this.num1;
+   this.num2=this.num2;
+   this.num3=this.num3;
+   return this.num1+this.num2+this.num3;
+  } */
+
+  public void add(float f1 , float f2){
+   this.f1=f1;
+   this.f2=f2;
+   System.out.println(this.f1+this.f2);
+  }
+
+   public void add(int num1, float f1 , float f2){
+   this.f1=f1;
+   this.f2=f2;
+   this.num1=num1;
+   System.out.println(this.f1+this.f2+this.num1);
+  }
+
+  public void add(int num1, int num2, float f1 , float f2){
+   this.f1=f1;
+   this.f2=f2;
+   this.num1=num1;
+   this.num2=num2;
+   System.out.println(this.f1+this.f2+this.num1+this.num2);
+  }
+
+   public void add(int num1, int num2,int num3, float f1 , float f2){
+   this.f1=f1;
+   this.f2=f2;
+   this.num1=num1;
+   this.num2=num2;
+   this.num2=num3;
+   System.out.println(this.f1+this.f2+this.num1+this.num2+this.num3);
+  }
+}
+
+public class NumberMain{
+ public static void main(String args[]) {
+   Number number=new Number();
+   number.add(1,2,3);
+   number.add(23.45f,12.34f);
+   number.add(2,34.56f,34.6f);
+   number.add(2,3,12.45f,12.23f);
+   number.add(1,2,3,13.43f,23.456f);
+  }
+ }
+-----------------------------------------------------------------------------------------------
+   
